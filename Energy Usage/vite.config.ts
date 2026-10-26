@@ -5,10 +5,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), VitePWA({
-    strategies: 'injectManifest',
-    srcDir: 'src',
-    filename: 'sw.ts',
-    registerType: 'prompt',
+    registerType: 'autoUpdate',
     injectRegister: false,
 
     pwaAssets: {
@@ -18,13 +15,15 @@ export default defineConfig({
 
     manifest: {
       name: 'Energy Usage',
-      short_name: 'Energy Usage',
-      description: 'Energy Usage',
+      short_name: 'Energy',
+      description: 'my app',
       theme_color: '#ffffff',
     },
 
-    injectManifest: {
+    workbox: {
       globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
+      cleanupOutdatedCaches: true,
+      clientsClaim: true,
     },
 
     devOptions: {
